@@ -1,0 +1,19 @@
+PWD c:\Users\ASUS ROG STRIX\Desktop\Yachay\Programación\LaTex\home\user\informe-5-laboratorio-quimica-II
+INPUT C:\Users\ASUS ROG STRIX\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
+INPUT c:\Users\ASUS ROG STRIX\Desktop\Yachay\Programación\LaTex\home\user\informe-5-laboratorio-quimica-II\informe_5.tex
+OUTPUT informe_5.log
+INPUT C:\Users\ASUS ROG STRIX\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls
+INPUT C:\Users\ASUS ROG STRIX\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls
+INPUT C:\Users\ASUS ROG STRIX\AppData\Local\Programs\MiKTeX\tex\latex\base\size10.clo
+INPUT C:\Users\ASUS ROG STRIX\AppData\Local\Programs\MiKTeX\tex\latex\base\size10.clo
+INPUT C:\Users\ASUS ROG STRIX\AppData\Local\Programs\MiKTeX\tex\latex\base\size10.clo
+INPUT C:\Users\ASUS ROG STRIX\AppData\Local\Programs\MiKTeX\tex\latex\booktabs\booktabs.sty
+INPUT C:\Users\ASUS ROG STRIX\AppData\Local\Programs\MiKTeX\tex\latex\booktabs\booktabs.sty
+INPUT C:\Users\ASUS ROG STRIX\AppData\Local\Programs\MiKTeX\tex\latex\l3backend\l3backend-pdftex.def
+INPUT C:\Users\ASUS ROG STRIX\AppData\Local\Programs\MiKTeX\tex\latex\l3backend\l3backend-pdftex.def
+INPUT .\informe_5.aux
+INPUT .\informe_5.aux
+INPUT informe_5.aux
+OUTPUT informe_5.aux
+INPUT C:\Users\ASUS ROG STRIX\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmti10.tfm
+INPUT informe_5.aux

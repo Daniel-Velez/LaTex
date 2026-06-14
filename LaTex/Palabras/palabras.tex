@@ -1,0 +1,96 @@
+\documentclass[11pt, a4paper]{article}
+
+% --- BLOQUE UNIVERSAL DE PREÁMBULO ---
+\usepackage[a4paper, top=1.5cm, bottom=1.5cm, left=1cm, right=1cm]{geometry}
+
+\usepackage[spanish, bidi=basic, provide=*]{babel}
+
+\babelprovide[import, onchar=ids fonts]{spanish}
+\babelprovide[import, onchar=ids fonts]{english}
+
+
+% Paquetes adicionales para el diseño de las tarjetas
+\usepackage[most]{tcolorbox}
+\usepackage{multicol}
+\usepackage{enumitem}
+
+% Definición del estilo de la tarjeta
+\newtcolorbox{tarjeta}[1]{
+  colback=white,
+  colframe=teal!75!black,
+  fonttitle=\bfseries\large,
+  title=#1,
+  width=\linewidth,
+  height=5.5cm,
+  valign=center,
+  halign=center,
+  boxrule=1pt,
+  arc=3mm,
+  enhanced,
+  drop shadow
+}
+
+\begin{document}
+
+\pagestyle{empty} % Quitar números de página
+
+\begin{center}
+    \Huge \textbf{Palabras Positivas} \\
+    \vspace{1cm}
+\end{center}
+
+\begin{multicols}{2}
+
+    \begin{tarjeta}{Resiliencia}
+        \textbf{Definición:} La capacidad de adaptarse y superar la adversidad o traumas. \\
+        \textit{"Cada reto es una oportunidad para crecer."}
+    \end{tarjeta}
+
+    \begin{tarjeta}{Gratitud}
+        \textbf{Definición:} Sentimiento de estima y reconocimiento por un beneficio recibido. \\
+        \textit{"La gratitud convierte lo que tenemos en suficiente."}
+    \end{tarjeta}
+
+    \begin{tarjeta}{Empatía}
+        \textbf{Definición:} Capacidad de identificarse con alguien y compartir sus sentimientos. \\
+        \textit{"Escuchar con el corazón es el mejor regalo."}
+    \end{tarjeta}
+
+    \begin{tarjeta}{Optimismo}
+        \textbf{Definición:} Tendencia a ver y juzgar las cosas en su aspecto más favorable. \\
+        \textit{"El sol siempre brilla detrás de las nubes."}
+    \end{tarjeta}
+
+    \begin{tarjeta}{Bondad}
+        \textbf{Definición:} Inclinación natural a hacer el bien a los demás. \\
+        \textit{"Un pequeño acto de bondad puede cambiar el mundo."}
+    \end{tarjeta}
+
+    \begin{tarjeta}{Esperanza}
+        \textbf{Definición:} Confianza de lograr una cosa o de que se realice algo deseado. \\
+        \textit{"La esperanza es el ancla del alma."}
+    \end{tarjeta}
+
+    \begin{tarjeta}{Entusiasmo}
+        \textbf{Definición:} Exaltación del ánimo por algo que lo cautiva o admira. \\
+        \textit{"Nada grande se ha logrado sin entusiasmo."}
+    \end{tarjeta}
+
+    \begin{tarjeta}{Serenidad}
+        \textbf{Definición:} Estado de tranquilidad, calma y paz interior. \\
+        \textit{"En la calma encontrarás la respuesta."}
+    \end{tarjeta}
+
+    \begin{tarjeta}{Valentía}
+        \textbf{Definición:} Determinación para enfrentarse a situaciones difíciles o peligrosas. \\
+        \textit{"El valor no es la ausencia de miedo, sino vencerlo."}
+    \end{tarjeta}
+
+    \begin{tarjeta}{Altruismo}
+        \textbf{Definición:} Tendencia a procurar el bien ajeno de manera desinteresada. \\
+        \textit{"Dar sin esperar nada a cambio es la verdadera riqueza."}
+    \end{tarjeta}
+
+\end{multicols}
+
+\end{document}

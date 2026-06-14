@@ -1,0 +1,351 @@
+\documentclass[12pt, a4paper]{article}
+
+% ─── Codificación y lenguaje ───────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish, es-noshorthands]{babel}
+
+% ─── Fuentes ──────────────────────────────────────────────────────────────────
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% ─── Matemáticas ──────────────────────────────────────────────────────────────
+\usepackage{amsmath, amssymb, amsthm, mathtools}
+
+% ─── Geometría y diseño ───────────────────────────────────────────────────────
+\usepackage[
+    top=2.5cm, bottom=2.5cm,
+    left=3cm,  right=3cm
+]{geometry}
+\usepackage{parskip}
+\usepackage{setspace}
+\onehalfspacing
+
+% ─── Color y gráficos ─────────────────────────────────────────────────────────
+\usepackage[dvipsnames, table]{xcolor}
+\definecolor{azulprincipal}{RGB}{25, 60, 115}
+\definecolor{azulclaro}{RGB}{210, 225, 245}
+\definecolor{grisclaro}{RGB}{245, 247, 250}
+\definecolor{dorado}{RGB}{180, 140, 40}
+
+% ─── Cajas y marcos ───────────────────────────────────────────────────────────
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable, theorems}
+
+% Caja para teoremas
+\tcbset{
+    teostyle/.style={
+        enhanced, breakable,
+        colback=azulclaro!30,
+        colframe=azulprincipal,
+        fonttitle=\bfseries\color{azulprincipal},
+        attach boxed title to top left={yshift=-2mm, xshift=6mm},
+        boxed title style={
+            colback=azulprincipal,
+            colframe=azulprincipal,
+            sharp corners
+        },
+        sharp corners=south,
+        left=6pt, right=6pt, top=8pt, bottom=6pt,
+    },
+    resultstyle/.style={
+        enhanced,
+        colback=grisclaro,
+        colframe=dorado,
+        fonttitle=\bfseries\color{dorado},
+        sharp corners,
+        left=8pt, right=8pt, top=6pt, bottom=6pt,
+        boxrule=1.2pt,
+    },
+    defstyle/.style={
+        enhanced,
+        colback=white,
+        colframe=azulprincipal!50,
+        fonttitle=\bfseries\color{azulprincipal},
+        sharp corners,
+        left=8pt, right=8pt, top=6pt, bottom=6pt,
+        borderline west={3pt}{0pt}{azulprincipal},
+        boxrule=0pt,
+        frame hidden,
+    }
+}
+
+% ─── Encabezados y pies de página ─────────────────────────────────────────────
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{azulprincipal}\textit{EDO con Transformadas de Laplace}}
+\fancyhead[R]{\small\color{azulprincipal}\thepage}
+\renewcommand{\headrulewidth}{0.6pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{azulprincipal}\leaders\hrule height \headrulewidth\hfill}}
+
+% ─── Títulos de sección ────────────────────────────────────────────────────────
+\usepackage{titlesec}
+\titleformat{\section}
+    {\large\bfseries\color{azulprincipal}}
+    {\thesection.}{0.6em}{}[{\color{azulprincipal}\titlerule[0.6pt]}]
+\titleformat{\subsection}
+    {\normalsize\bfseries\color{azulprincipal!80}}
+    {\thesubsection.}{0.5em}{}
+
+% ─── Tabla de contenidos ──────────────────────────────────────────────────────
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\bfseries\color{azulprincipal}}
+\renewcommand{\cftsecpagefont}{\bfseries\color{azulprincipal}}
+\renewcommand{\cftsubsecfont}{\color{azulprincipal!80}}
+\renewcommand{\cftsubsecpagefont}{\color{azulprincipal!80}}
+
+% ─── Hipervínculos ────────────────────────────────────────────────────────────
+\usepackage[
+    colorlinks=true,
+    linkcolor=azulprincipal,
+    urlcolor=azulprincipal
+]{hyperref}
+
+% ─── Comandos personalizados ──────────────────────────────────────────────────
+\newcommand{\Lap}{\mathcal{L}}
+\newcommand{\U}{\mathcal{U}}
+\newcommand{\R}{\mathbb{R}}
+
+% Entornos de teorema con tcolorbox
+\newenvironment{teorema}[1]{%
+    \begin{tcolorbox}[teostyle, title={Teorema: #1}]%
+}{%
+    \end{tcolorbox}%
+}
+\newenvironment{resultado}{%
+    \begin{tcolorbox}[resultstyle]%
+}{%
+    \end{tcolorbox}%
+}
+\newenvironment{definicion}[1]{%
+    \begin{tcolorbox}[defstyle, title={#1}]%
+}{%
+    \end{tcolorbox}%
+}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\begin{document}
+% ══════════════════════════════════════════════════════════════════════════════
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Planteamiento del problema}
+% ══════════════════════════════════════════════════════════════════════════════
+
+Se desea encontrar la función $y(t)$ que satisface el siguiente problema de valor inicial:
+
+\begin{resultado}
+\[
+    y'' + y = f(t), \qquad y(0) = 1, \quad y'(0) = 0
+\]
+donde la función de forzamiento está definida por:
+\[
+    f(t) =
+    \begin{cases}
+        1, & 0 \leq t < \dfrac{\pi}{2} \\[8pt]
+        \sin(t), & t \geq \dfrac{\pi}{2}
+    \end{cases}
+\]
+\end{resultado}
+
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Desarrollo de la solución}
+% ══════════════════════════════════════════════════════════════════════════════
+
+\subsection{Paso 1: Reescritura de \texorpdfstring{$f(t)$}{f(t)} mediante escalones}
+
+El primer paso consiste en expresar la función $f(t)$ en términos de la función escalón unitario..
+
+Dado que $f(t)$ cambia de valor en $t = \pi/2$, se escribe:
+\[
+    f(t) = 1 + \bigl(\sin(t) - 1\bigr)\,\U\!\left(t - \frac{\pi}{2}\right)
+\]
+
+\subsection{Paso 2: Aplicación de la transformada de Laplace}
+
+Se aplica $\Lap\{\cdot\}$ a ambos lados de la ecuación diferencial:
+\[
+    \Lap\{y''\} + \Lap\{y\} = \Lap\{f(t)\}
+\]
+
+Usando las propiedades estándar y las condiciones iniciales $y(0) = 1$, $y'(0) = 0$:
+\begin{align*}
+    \Lap\{y\}   &= Y(s) \\
+    \Lap\{y''\} &= s^2\,Y(s) - s\,y(0) - y'(0) = s^2\,Y(s) - s
+\end{align*}
+
+Para la transformada del forzamiento, se aplica el segundo teorema de traslación. Dado que el argumento del escalón es $t - \pi/2$, se evalúa $f$ desplazada:
+\[
+    \sin\!\left(\left(t - \frac{\pi}{2}\right) + \frac{\pi}{2}\right) - 1
+    = \sin(t) - 1
+    \quad \Longrightarrow \quad
+    \text{el factor es }\sin(t) - 1\text{ en términos de }t
+\]
+
+Calculando por separado usando identidades trigonométricas ($\sin(t) = \cos(t - \pi/2)$):
+\begin{align*}
+    \Lap\{f(t)\}
+    &= \Lap\{1\} + \Lap\!\left\{\bigl(\sin(t)-1\bigr)\,\U\!\left(t-\tfrac{\pi}{2}\right)\right\} \\[4pt]
+    &= \frac{1}{s}
+      + e^{-\frac{\pi}{2}s}\,\Lap\!\left\{\sin\!\left(t+\tfrac{\pi}{2}\right) - 1\right\} \\[4pt]
+    &= \frac{1}{s}
+      + e^{-\frac{\pi}{2}s}\,\Lap\{\cos(t) - 1\} \\[4pt]
+    &= \frac{1}{s}
+      + e^{-\frac{\pi}{2}s}\left(\frac{s}{s^2+1} - \frac{1}{s}\right)
+\end{align*}
+
+\subsection{Paso 3: Despeje de \texorpdfstring{$Y(s)$}{Y(s)}}
+
+Sustituyendo en la ecuación transformada:
+\[
+    s^2\,Y - s + Y = \frac{1}{s} + \left(\frac{s}{s^2+1} - \frac{1}{s}\right)e^{-\frac{\pi}{2}s}
+\]
+\[
+    Y\,(s^2 + 1) = s + \frac{1}{s} + \left(\frac{s}{s^2+1} - \frac{1}{s}\right)e^{-\frac{\pi}{2}s}
+\]
+
+Dividiendo entre $(s^2 + 1)$:
+\[
+    Y(s) = \frac{s}{s^2+1} + \frac{1}{s(s^2+1)}
+           + \left(\frac{s}{(s^2+1)^2} - \frac{1}{s(s^2+1)}\right)e^{-\frac{\pi}{2}s}
+\]
+
+La solución en el dominio temporal se obtiene aplicando la transformada inversa a cada término:
+\[
+    y(t) = \Lap^{-1}\!\left\{\frac{s}{s^2+1}\right\}
+         + \Lap^{-1}\!\left\{\frac{1}{s(s^2+1)}\right\}
+         + \Lap^{-1}\!\left\{\frac{s\,e^{-\frac{\pi}{2}s}}{(s^2+1)^2}\right\}
+         - \Lap^{-1}\!\left\{\frac{e^{-\frac{\pi}{2}s}}{s(s^2+1)}\right\}
+\]
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Cálculo de las transformadas inversas}
+% ══════════════════════════════════════════════════════════════════════════════
+
+\subsection{Término 1: \texorpdfstring{$\Lap^{-1}\!\left\{\dfrac{s}{s^2+1}\right\}$}{}}
+
+Se aplica directamente la fórmula tabular de la transformada del coseno:
+
+\begin{resultado}
+\[
+    \Lap^{-1}\!\left\{\frac{s}{s^2+1}\right\} = \cos(t)
+\]
+\end{resultado}
+
+\subsection{Término 2: \texorpdfstring{$\Lap^{-1}\!\left\{\dfrac{1}{s(s^2+1)}\right\}$}{}}
+
+Se reescribe la expresión como el producto $\dfrac{1}{s}\cdot\dfrac{1}{s^2+1}$ y se aplica el \textbf{teorema de convolución}. Identificando:
+\[
+    F(s) = \frac{1}{s} \;\Longrightarrow\; f(t) = 1,
+    \qquad
+    G(s) = \frac{1}{s^2+1} \;\Longrightarrow\; g(t) = \sin(t)
+\]
+
+Se calcula la convolución:
+\[
+    \Lap^{-1}\!\left\{\frac{1}{s(s^2+1)}\right\}
+    = (1 * \sin)(t)
+    = \int_0^t \sin(\tau)\,d\tau
+    = \bigl[-\cos(\tau)\bigr]_0^t
+    = 1 - \cos(t)
+\]
+
+\begin{resultado}
+\[
+    \Lap^{-1}\!\left\{\frac{1}{s(s^2+1)}\right\} = 1 - \cos(t)
+\]
+\end{resultado}
+
+\subsection{Término 3: \texorpdfstring{$\Lap^{-1}\!\left\{\dfrac{s\,e^{-\frac{\pi}{2}s}}{(s^2+1)^2}\right\}$}{}}
+
+Por el segundo teorema de traslación, se necesita primero calcular:
+\[
+    h(t) = \Lap^{-1}\!\left\{\frac{s}{(s^2+1)^2}\right\}
+\]
+
+\textbf{Aplicación del teorema de derivada en frecuencia.} Se observa que:
+\[
+    \frac{d}{ds}\left[\frac{1}{s^2+1}\right] = -\frac{2s}{(s^2+1)^2}
+    \quad \Longrightarrow \quad
+    \frac{s}{(s^2+1)^2} = -\frac{1}{2}\frac{d}{ds}\left[\frac{1}{s^2+1}\right]
+\]
+
+Usando el teorema de derivada con $n=1$ y $F(s) = \dfrac{1}{s^2+1}$, cuya inversa es $f(t) = \sin(t)$:
+\[
+    \Lap^{-1}\!\left\{-\frac{d}{ds}F(s)\right\} = t\,f(t) = t\sin(t)
+\]
+
+Por lo tanto:
+\[
+    \Lap^{-1}\!\left\{\frac{s}{(s^2+1)^2}\right\}
+    = \frac{1}{2}\,t\sin(t)
+\]
+
+Aplicando ahora el segundo teorema de traslación con $a = \pi/2$ y usando que $\sin(t - \pi/2) = -\cos(t)$:
+\begin{align*}
+    \Lap^{-1}\!\left\{\frac{s\,e^{-\frac{\pi}{2}s}}{(s^2+1)^2}\right\}
+    &= \frac{1}{2}\left(t-\frac{\pi}{2}\right)\sin\!\left(t-\frac{\pi}{2}\right)\,\U\!\left(t-\frac{\pi}{2}\right) \\[4pt]
+    &= -\frac{1}{2}\left(t-\frac{\pi}{2}\right)\cos(t)\,\U\!\left(t-\frac{\pi}{2}\right)
+\end{align*}
+
+\begin{resultado}
+\[
+    \Lap^{-1}\!\left\{\frac{s\,e^{-\frac{\pi}{2}s}}{(s^2+1)^2}\right\}
+    = -\frac{1}{2}\!\left(t-\frac{\pi}{2}\right)\cos(t)\,\U\!\left(t-\frac{\pi}{2}\right)
+\]
+\end{resultado}
+
+\subsection{Término 4: \texorpdfstring{$\Lap^{-1}\!\left\{\dfrac{e^{-\frac{\pi}{2}s}}{s(s^2+1)}\right\}$}{}}
+
+Por el segundo teorema de traslación y el resultado del Término~2:
+\[
+    \Lap^{-1}\!\left\{\frac{e^{-\frac{\pi}{2}s}}{s(s^2+1)}\right\}
+    = \left[1 - \cos\!\left(t-\frac{\pi}{2}\right)\right]\U\!\left(t-\frac{\pi}{2}\right)
+\]
+
+Usando la identidad $\cos(t - \pi/2) = \sin(t)$:
+
+\begin{resultado}
+\[
+    \Lap^{-1}\!\left\{\frac{e^{-\frac{\pi}{2}s}}{s(s^2+1)}\right\}
+    = \bigl[1 - \sin(t)\bigr]\,\U\!\left(t-\frac{\pi}{2}\right)
+\]
+\end{resultado}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Solución final}
+% ══════════════════════════════════════════════════════════════════════════════
+
+Reuniendo todos los términos obtenidos:
+\begin{align*}
+    y(t) &= \cos(t)
+           + \bigl(1 - \cos(t)\bigr)
+           - \frac{1}{2}\!\left(t-\frac{\pi}{2}\right)\cos(t)\,\U\!\left(t-\frac{\pi}{2}\right)
+           - \bigl[1 - \sin(t)\bigr]\,\U\!\left(t-\frac{\pi}{2}\right)
+\end{align*}
+
+Simplificando los términos sin escalón ($\cos t + 1 - \cos t = 1$) y factorizando el escalón:
+
+\begin{resultado}
+\[
+    \boxed{
+        y(t) = 1 + \U\!\left(t - \frac{\pi}{2}\right)
+        \left[\sin(t) - 1 - \frac{1}{2}\!\left(t - \frac{\pi}{2}\right)\cos(t)\right]
+    }
+\]
+\end{resultado}
+
+\medskip
+
+Esta solución puede verificarse evaluando en cada subintervalo:
+
+\begin{itemize}
+    \item Para $0 \leq t < \dfrac{\pi}{2}$: el escalón es nulo, por lo que $y(t) = 1$. \\
+          Efectivamente, $y(0) = 1$ y $y'(t) = 0$ satisfacen las condiciones iniciales.
+
+    \item Para $t \geq \dfrac{\pi}{2}$: el escalón se activa y la solución incorpora la respuesta al forzamiento $\sin(t)$, con la transición continua garantizada por la construcción del escalón en $t = \pi/2$.
+\end{itemize}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\end{document}

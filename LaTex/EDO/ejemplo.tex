@@ -1,0 +1,240 @@
+\documentclass[12pt, a4paper]{article}
+
+% ── Codificación y fuentes ──────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% ── Matemáticas ─────────────────────────────────────────────────────────────
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}          % coloneqq, aligned, etc.
+
+% ── Idioma ──────────────────────────────────────────────────────────────────
+\usepackage[spanish]{babel}
+
+% ── Diseño de página ────────────────────────────────────────────────────────
+\usepackage[top=2.5cm, bottom=2.5cm, left=3cm, right=3cm]{geometry}
+\usepackage{parskip}            % espacio entre párrafos en lugar de sangría
+\usepackage{microtype}          % mejor justificación del texto
+
+% ── Colores y cajas ─────────────────────────────────────────────────────────
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+
+% ── Encabezados y secciones ─────────────────────────────────────────────────
+\usepackage{titlesec}
+\titleformat{\section}{\large\bfseries\color{blue!60!black}}{}{0em}{}[\titlerule]
+\titlespacing{\section}{0pt}{1.5ex}{0.8ex}
+
+% ── Enumeraciones y listas ──────────────────────────────────────────────────
+\usepackage{enumitem}
+\setlist[itemize]{noitemsep, topsep=3pt}
+
+% ── Hiperreferencias ────────────────────────────────────────────────────────
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue!60!black}
+
+% ── Macros de conveniencia ──────────────────────────────────────────────────
+\newcommand{\Lap}{\mathcal{L}}              % Transformada de Laplace
+\newcommand{\ILap}{\mathcal{L}^{-1}}       % Transformada inversa
+\newcommand{\Uu}{\mathcal{U}}              % Función escalón de Heaviside
+\newcommand{\half}{\tfrac{1}{2}}
+\newcommand{\sfrac}[2]{\tfrac{#1}{#2}}
+
+% ── Definición de caja para resultados destacados ───────────────────────────
+\newtcolorbox{resultbox}{
+  enhanced, breakable,
+  colback=blue!5!white, colframe=blue!60!black,
+  fonttitle=\bfseries, title=Resultado,
+  left=6pt, right=6pt, top=4pt, bottom=4pt
+}
+
+\newtcolorbox{stepbox}[1]{
+  enhanced,
+  colback=gray!8!white, colframe=gray!50!black,
+  title=#1, fonttitle=\bfseries\small,
+  left=6pt, right=6pt, top=4pt, bottom=4pt
+}
+
+% ── Datos del documento ─────────────────────────────────────────────────────
+\title{\textbf{Solución mediante Transformada de Laplace}\\[4pt]
+       \large Ecuación diferencial de segundo orden con forzamiento discontinuo}
+\date{}
+
+% ════════════════════════════════════════════════════════════════════════════
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+% ────────────────────────────────────────────────────────────────────────────
+\section{Planteamiento del problema}
+
+Se resuelve el problema de valor inicial:
+\begin{equation}
+  y'' + y' + \frac{5}{4}\,y = 1 - \Uu(t-\pi),
+  \qquad y(0) = 1,\quad y'(0) = -1.
+  \label{eq:pvi}
+\end{equation}
+
+% ────────────────────────────────────────────────────────────────────────────
+\section{Aplicación de la Transformada de Laplace}
+
+Sea $Y = \Lap\{y\}$. Las transformadas de las derivadas son:
+\begin{align*}
+  \Lap\{y'\}  &= sY - y(0)         = sY - 1, \\
+  \Lap\{y''\} &= s^{2}Y - sy(0) - y'(0) = s^{2}Y - s + 1.
+\end{align*}
+
+Para el lado derecho, usando el segundo teorema de traslación:
+\[
+  \Lap\!\left\{1 - \Uu(t-\pi)\right\} = \frac{1}{s} - \frac{e^{-\pi s}}{s}.
+\]
+
+Sustituyendo en \eqref{eq:pvi}:
+\[
+  \bigl(s^{2}Y - s + 1\bigr) + \bigl(sY - 1\bigr) + \frac{5}{4}\,Y
+  = \frac{1}{s} - \frac{e^{-\pi s}}{s},
+\]
+\[
+  Y\!\left(s^{2} + s + \frac{5}{4}\right) = \frac{1}{s} - \frac{e^{-\pi s}}{s} + s.
+\]
+
+\paragraph{Factorización del denominador.}
+Completando el cuadrado:
+\[
+  s^{2} + s + \frac{5}{4}
+  = \left(s + \half\right)^{2} + 1.
+\]
+
+Por lo tanto:
+\begin{equation}
+  Y = \underbrace{\frac{1}{s\!\left[\!\left(s+\half\right)^{2}+1\right]}}_{Y_1}
+    - \underbrace{\frac{e^{-\pi s}}{s\!\left[\!\left(s+\half\right)^{2}+1\right]}}_{Y_2}
+    + \underbrace{\frac{s}{\left(s+\half\right)^{2}+1}}_{Y_3}.
+  \label{eq:Y}
+\end{equation}
+
+% ────────────────────────────────────────────────────────────────────────────
+\section{Cálculo de las transformadas inversas}
+
+% ---- L1 --------------------------------------------------------------------
+\begin{stepbox}{Transformada $L_1 = \ILap\{Y_1\}$: convolución}
+
+Escribimos $Y_1 = F(s)\cdot G(s)$ con
+\[
+  F(s) = \frac{1}{s} \;\Longrightarrow\; f(t) = 1,
+  \qquad
+  G(s) = \frac{1}{\left(s+\half\right)^{2}+1}
+         \;\Longrightarrow\; g(t) = e^{-t/2}\sin t.
+\]
+
+Por el teorema de convolución:
+\[
+  L_1 = (f * g)(t) = \int_{0}^{t} e^{-\tau/2}\sin\tau\,d\tau.
+\]
+
+\textbf{Integral indefinida} (integración por partes dos veces):
+
+Primera aplicación con $u = e^{-\tau/2}$, $dv = \sin\tau\,d\tau$:
+\[
+  \int e^{-\tau/2}\sin\tau\,d\tau
+  = -\cos\tau\,e^{-\tau/2}
+    - \frac{1}{2}\int \cos\tau\,e^{-\tau/2}\,d\tau.
+\]
+
+Segunda aplicación con $u = e^{-\tau/2}$, $dv = \cos\tau\,d\tau$:
+\[
+  \int e^{-\tau/2}\sin\tau\,d\tau
+  = -\cos\tau\,e^{-\tau/2}
+    - \frac{1}{2}\!\left(\sin\tau\,e^{-\tau/2}
+    - \frac{1}{2}\int e^{-\tau/2}\sin\tau\,d\tau\right).
+\]
+
+Despejando la integral:
+\[
+  \frac{5}{4}\int e^{-\tau/2}\sin\tau\,d\tau
+  = -\cos\tau\,e^{-\tau/2} - \frac{1}{2}\sin\tau\,e^{-\tau/2},
+\]
+\[
+  \int e^{-\tau/2}\sin\tau\,d\tau
+  = -\frac{4}{5}\cos\tau\,e^{-\tau/2} - \frac{2}{5}\sin\tau\,e^{-\tau/2}.
+\]
+
+Evaluando en $[0,\,t]$:
+\end{stepbox}
+
+\begin{resultbox}
+\[
+  L_1 = \frac{4}{5} - \frac{4}{5}\cos t\,e^{-t/2} - \frac{2}{5}\sin t\,e^{-t/2}.
+\]
+\end{resultbox}
+
+\bigskip
+
+% ---- L2 --------------------------------------------------------------------
+\begin{stepbox}{Transformada $L_2 = \ILap\{Y_2\}$: segundo teorema de traslación}
+
+Por el segundo teorema de traslación, si $\ILap\!\left\{\sfrac{F(s)}{s}\right\} = f(t)$, entonces:
+\[
+  \ILap\!\left\{e^{-\pi s}\frac{F(s)}{s}\right\} = \Uu(t-\pi)\,f(t-\pi).
+\]
+
+Usando el resultado de $L_1$ con $t \leftarrow t - \pi$:
+\end{stepbox}
+
+\begin{resultbox}
+\[
+  L_2 = \Uu(t-\pi)\!\left[
+      \frac{4}{5}
+    - \frac{4}{5}\cos(t-\pi)\,e^{-(t-\pi)/2}
+    - \frac{2}{5}\sin(t-\pi)\,e^{-(t-\pi)/2}
+  \right].
+\]
+\end{resultbox}
+
+\bigskip
+
+% ---- L3 --------------------------------------------------------------------
+\begin{stepbox}{Transformada $L_3 = \ILap\{Y_3\}$: traslación en $s$}
+
+Sumando y restando $\half$ en el numerador:
+\[
+  Y_3 = \frac{s + \half - \half}{\left(s+\half\right)^{2}+1}
+      = \frac{s + \half}{\left(s+\half\right)^{2}+1}
+        - \frac{\half}{\left(s+\half\right)^{2}+1}.
+\]
+
+Aplicando la primera propiedad de traslación ($e^{-at}\cos\omega t$ y $e^{-at}\sin\omega t$):
+\end{stepbox}
+
+\begin{resultbox}
+\[
+  L_3 = e^{-t/2}\cos t - \frac{1}{2}\,e^{-t/2}\sin t.
+\]
+\end{resultbox}
+
+% ────────────────────────────────────────────────────────────────────────────
+\section{Solución final}
+
+La solución del PVI \eqref{eq:pvi} es $y = L_1 - L_2 + L_3$:
+
+\begin{tcolorbox}[enhanced, colback=green!6!white, colframe=green!50!black,
+                  fonttitle=\bfseries, title=Solución $y(t)$]
+\begin{align*}
+  y(t) ={}&
+    \frac{4}{5}
+    - \frac{4}{5}\cos t\,e^{-t/2}
+    - \frac{2}{5}\sin t\,e^{-t/2}
+    + e^{-t/2}\cos t
+    - \frac{1}{2}\,e^{-t/2}\sin t \\[6pt]
+    &- \Uu(t-\pi)\!\left[
+        \frac{4}{5}
+        - \frac{4}{5}\cos(t-\pi)\,e^{-(t-\pi)/2}
+        - \frac{2}{5}\sin(t-\pi)\,e^{-(t-\pi)/2}
+      \right].
+\end{align*}
+\end{tcolorbox}
+
+\end{document}

@@ -1,0 +1,98 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.5.22)  14 JUN 2026 07:12
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**"c:/Users/ASUS ROG STRIX/Desktop/Yachay/Programación/LaTex/home/user/informe-5-laboratorio-quimica-II/informe_5.tex"
+(c:/Users/ASUS ROG STRIX/Desktop/Yachay/Programación/LaTex/home/user/informe-5-laboratorio-quimica-II/informe_5.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-03-20>
+(C:\Users\ASUS ROG STRIX\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(C:\Users\ASUS ROG STRIX\AppData\Local\Programs\MiKTeX\tex/latex/base\size10.clo
+File: size10.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count275
+\c@section=\count276
+\c@subsection=\count277
+\c@subsubsection=\count278
+\c@paragraph=\count279
+\c@subparagraph=\count280
+\c@figure=\count281
+\c@table=\count282
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
+\bibindent=\dimen150
+) (C:\Users\ASUS ROG STRIX\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen151
+\lightrulewidth=\dimen152
+\cmidrulewidth=\dimen153
+\belowrulesep=\dimen154
+\belowbottomsep=\dimen155
+\aboverulesep=\dimen156
+\abovetopsep=\dimen157
+\cmidrulesep=\dimen158
+\cmidrulekern=\dimen159
+\defaultaddspace=\dimen160
+\@cmidla=\count283
+\@cmidlb=\count284
+\@aboverulesep=\dimen161
+\@belowrulesep=\dimen162
+\@thisruleclass=\count285
+\@lastruleclass=\count286
+\@thisrulewidth=\dimen163
+) (C:\Users\ASUS ROG STRIX\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
+File: l3backend-pdftex.def 2026-02-18 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count287
+) (informe_5.aux)
+\openout1 = `informe_5.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 8.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 8.
+
+Overfull \hbox (62.1076pt too wide) in paragraph at lines 17--21
+ [][] 
+ []
+
+
+c:/Users/ASUS ROG STRIX/Desktop/Yachay/Programación/LaTex/home/user/informe-5-laboratorio-quimica-II/informe_5.tex:21: LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.21 \end{tabular}\\ \\
+                        \\\textit{}
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+c:/Users/ASUS ROG STRIX/Desktop/Yachay/Programación/LaTex/home/user/informe-5-laboratorio-quimica-II/informe_5.tex:21: LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.21 \end{tabular}\\ \\ \\
+                          \textit{}
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to
