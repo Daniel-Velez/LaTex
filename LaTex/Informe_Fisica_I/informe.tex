@@ -1,0 +1,473 @@
+\documentclass[11pt,a4paper]{article}
+
+% --- Paquetes de Idioma y Codificación ---
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[T1]{fontenc}
+
+% --- Paquetes de Diseño de Página ---
+\usepackage{geometry}
+\geometry{top=25mm, bottom=25mm, left=20mm, right=20mm}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{float}
+
+% --- Paquetes Matemáticos y de Unidades ---
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{siunitx}
+
+% --- Configuración de Encabezado y Pie de Página ---
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Universidad Yachay Tech - Laboratorio de Física I}
+\rhead{Informe 4: Dinámica}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% --- Configuración de Columnas de Tabla ---
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+
+\begin{document}
+
+% =========================================================================
+% PORTADA / ENCABEZADO PRINCIPAL
+% =========================================================================
+\begin{center}
+    \textsc{\Large Escuela de Ciencias Físicas y Nanotecnología} \\[0.2cm]
+    \textsc{\large Universidad Yachay Tech} \\[0.6cm]
+    \noindent\rule{\textwidth}{1pt} \\[0.4cm]
+    {\Large \bfseries Laboratorio de Física I} \\[0.3cm]
+    {\LARGE \bfseries Tema: Dinámica} \\[0.4cm]
+    \noindent\rule{\textwidth}{1pt} \\[0.6cm]
+\end{center}
+
+\begin{flushleft}
+    \textbf{Paralelo:} PG \\
+    \textbf{Integrantes:} \\
+    \hspace{0.5cm} Aguilar Pereira Jhair Andree \\
+    \hspace{0.5cm} Vélez Reyes Daniel Steven \\
+    \textbf{Entrega de informe:} 23/10/2025
+\end{flushleft}
+\vspace{0.5cm}
+
+% =========================================================================
+% 1. OBJETIVO
+% =========================================================================
+\section{Objetivo}
+\begin{itemize}
+    \item Comprobar experimentalmente la relación entre fuerza neta, masa y aceleración.
+    \item Analizar el movimiento de un bloque que desciende en un plano inclinado con y sin fricción, variando el ángulo de inclinación, el coeficiente de fricción y la masa del bloque.
+    \item Analizar el movimiento de un sistema en un riel horizontal variando las masas e incluyendo la fricción cinética y estática.
+    \item Analizar el movimiento de un bloque que asciende en un plano inclinado con y sin fricción, variando el ángulo de inclinación, el coeficiente de fricción y la masa del bloque.
+\end{itemize}
+
+% =========================================================================
+% 2. FUNDAMENTOS TEÓRICOS
+% =========================================================================
+\section{Fundamentos Teóricos}
+El estudio de la dinámica constituye uno de los pilares fundamentales de la física clásica, pues permite comprender cómo las fuerzas influyen en el movimiento de los cuerpos, esto se lo hace por medio de las leyes de Newton.
+
+\subsection{Leyes de Newton}
+Isaac Newton formuló tres principios que explican el comportamiento dinámico de los objetos:
+
+\paragraph{Primera Ley o Ley de la Inercia:} Establece que un cuerpo permanece en reposo o en movimiento rectilíneo uniforme mientras la fuerza neta sobre él sea cero. Esto implica que el movimiento no requiere de una fuerza continua, sino únicamente de la ausencia de fuerzas desequilibradas. En las simulaciones, cuando se equilibran las fuerzas de ambos lados o desaparece la fricción, el cuerpo mantiene su velocidad constante, confirmando esta ley.
+
+\paragraph{Segunda Ley o Ley Fundamental de la Dinámica:} Describe cuantitativamente cómo cambia el movimiento de un cuerpo cuando actúa una fuerza neta sobre él:
+\begin{equation}
+    \vec{F}_{\text{neta}} = m \cdot \vec{a}
+\end{equation}
+donde $\vec{F}_{\text{neta}}$ es la suma de todas las fuerzas que actúan sobre el objeto, $m$ su masa, y $\vec{a}$ la aceleración producida. De esta relación se deduce que la aceleración es directamente proporcional a la fuerza neta e inversamente proporcional a la masa. Este principio fue comprobado experimentalmente al aplicar diferentes fuerzas y variar las masas en los simuladores.
+
+\paragraph{Tercera Ley o Ley de Acción y Reacción:} A toda fuerza de acción corresponde una fuerza de reacción de igual magnitud y sentido opuesto.
+
+\subsection{Fuerza de Rozamiento}
+El rozamiento es una fuerza que se opone al movimiento relativo entre dos superficies en contacto. Se clasifica en:
+\begin{itemize}
+    \item \textbf{Rozamiento estático ($f_s$):} impide el inicio del movimiento y se incrementa hasta alcanzar un valor máximo:
+    \begin{equation}
+        f_{s,\text{max}} = \mu_s N
+    \end{equation}
+    donde $\mu_s$ es el coeficiente de fricción estática y $N$ la fuerza normal.
+    \item \textbf{Rozamiento cinético ($f_k$):} actúa una vez que el cuerpo está en movimiento, con magnitud constante:
+    \begin{equation}
+        f_k = \mu_k N
+    \end{equation}
+    donde $\mu_k$ es el coeficiente de fricción cinético y $N$ la fuerza normal.
+\end{itemize}
+
+\subsection{Movimiento en un Plano Inclinado}
+En un plano inclinado, el peso del cuerpo se descompone en dos componentes:
+\begin{equation}
+    P_x = m g \sin(\theta)
+\end{equation}
+\begin{equation}
+    P_y = m g \cos(\theta)
+\end{equation}
+$P_x$ es la componente paralela del peso que es la responsable del movimiento y $P_y$ es la componente perpendicular del peso que determina la Fuerza Normal.
+
+La aceleración de un cuerpo sobre un plano inclinado al que no se le aplican otras fuerzas es:
+\begin{equation}
+    a = g(\sin(\theta) - \mu \cos(\theta))
+\end{equation}
+Siempre y cuando el cuerpo se mueva sobre una superficie con fricción sin que se le apliquen otras fuerzas que hagan que cambie su estado de movimiento.
+
+\subsection{Masas acopladas mediante Poleas y Cuerdas}
+En los sistemas formados por dos cuerpos conectados mediante una cuerda sobre una polea, la aceleración depende de la diferencia entre las fuerzas que actúan sobre cada masa:
+\begin{equation}
+    a = \frac{m_2 g - \mu m_1 g \cos(\theta) - m_1 g \sin(\theta)}{m_1 + m_2}
+\end{equation}
+Si el peso de la masa colgante es suficiente para vencer la fricción y la componente del peso del bloque sobre el plano, el sistema se acelera; de lo contrario, permanece en reposo.
+
+% =========================================================================
+% 3. MATERIALES Y EQUIPO
+% =========================================================================
+\section{Materiales y Equipo}
+\begin{itemize}
+    \item Computador con acceso a internet.
+    \item Navegador web.
+    \item Simulador PhET (\textit{Fuerzas y Movimiento: Fundamentos}).
+    \item Simulador UNED (\textit{Segunda Ley de Newton}).
+\end{itemize}
+
+% =========================================================================
+% 4. ACTIVIDADES Y RESULTADOS
+% =========================================================================
+\section{Actividades}
+
+\subsection{Actividad 1: Sogatira}
+\subsubsection{Procedimiento}
+\begin{enumerate}
+    \item Se accedió al simulador en la pestaña ``Fuerza Neta''.
+    \item Se colocaron personas en los equipos rojo y azul hasta generar una fuerza neta desequilibrada.
+    \item Se observó que el equipo con mayor fuerza provocaba una aceleración en el sistema.
+    \item Luego se equilibraron los equipos para igualar las fuerzas.
+    \item Se verificó que, al estar las fuerzas balanceadas, el sistema continuaba moviéndose con velocidad constante, cumpliendo la Primera Ley de Newton (Ley de la Inercia).
+\end{enumerate}
+
+\subsubsection{Registro de Datos}
+\begin{table}[H]
+\centering
+\caption{Observaciones del simulador en la actividad de Sogatira.}
+\begin{tabularx}{\textwidth}{@{} c c p{2.5cm} p{3.5cm} X @{}}
+\toprule
+\textbf{Equipo Rojo} & \textbf{Equipo Azul} & \textbf{Fuerza Neta} & \textbf{Movimiento Observado} & \textbf{Interpretación} \\ \midrule
+3 & 2 & Hacia la izquierda & El bloque se acelera hacia el equipo rojo & Movimiento uniformemente acelerado. \\ \addlinespace
+2 & 2 & Nula & El bloque se mantiene en movimiento a velocidad constante & Las fuerzas se equilibran; el sistema cumple la Primera Ley de Newton. \\ \addlinespace
+4 & 2 & Hacia la izquierda & Mayor aceleración hacia el rojo & Al aumentar la fuerza de un lado, crece la aceleración. \\ \bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection{Análisis de Resultados}
+\textbf{¿Se produce un movimiento uniforme o uniformemente acelerado?} \\
+Cuando la fuerza neta es distinta de cero, el sistema experimenta aceleración, por lo tanto el movimiento es uniformemente acelerado.
+
+\noindent \textbf{Si una vez que se ha producido el desequilibrio en la sogatira, intentamos equilibrarlo colocando nuevas personas, de forma que se igualen las fuerzas de los equipos, el conjunto se sigue desplazando a velocidad constante. ¿Por qué?} \\
+Cuando se está moviendo y se equilibran las fuerzas, el sistema continúa desplazándose ya que por la Primera Ley de Newton, un cuerpo en movimiento mantiene su estado de movimiento rectilíneo uniforme si la fuerza neta total es cero.
+
+% -------------------------------------------------------------------------
+\subsection{Actividad 2: Movimiento sin rozamiento}
+\subsubsection{Procedimiento}
+\begin{enumerate}
+    \item En la pestaña ``Movimiento'', se seleccionó un bloque sobre una superficie sin fricción.
+    \item Se aplicó una fuerza constante con el cursor durante un tiempo determinado.
+    \item Al retirar la fuerza, el bloque continuó moviéndose con velocidad uniforme, comprobando nuevamente la Ley de la Inercia.
+    \item Se registraron los valores de velocidad y tiempo.
+\end{enumerate}
+
+\subsubsection{Registro de Datos}
+\begin{table}[H]
+\centering
+\caption{Datos de observación y velocidad del simulador sin rozamiento.}
+\begin{tabularx}{\textwidth}{@{} C C C C C @{}}
+\toprule
+\textbf{Masa [kg]} & \textbf{Fuerza Aplicada [N]} & \textbf{Tiempo de Aplicación [s]} & \textbf{Velocidad Final [m/s]} & \textbf{Fuerza Neta} \\ \midrule
+50 & 100 & 6 & 12 & Constante \\
+50 & 0   & -- & 12 & Nula \\
+50 & 100 & 6 & 6.1 & Constante \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection{Análisis de Resultados}
+\textbf{Usando el cursor, aplicamos una fuerza durante un tiempo determinado a una masa y después la quitamos... ¿Qué ocurre? ¿Por qué pasa esto o qué ley lo justifica?} \\
+Al aplicar una fuerza durante cierto intervalo, el objeto aumenta su velocidad; cuando la fuerza deja de aplicarse, el objeto sigue moviéndose con la velocidad que tenía en ese instante. Como no hay rozamiento, no aparece una fuerza que se oponga al movimiento, de modo que la fuerza neta pasa a ser cero. Este comportamiento se ajusta a la Primera Ley de Newton: un objeto sobre una superficie sin rozamiento mantiene su velocidad constante cuando no actúan fuerzas externas netas.
+
+% -------------------------------------------------------------------------
+\subsection{Actividad 3: Segunda Ley de Newton}
+\subsubsection{Procedimiento}
+\begin{enumerate}
+    \item Se eligieron tres bloques de masas diferentes (\SI{50}{\kilogram}, \SI{100}{\kilogram}, \SI{130}{\kilogram}, \SI{200}{\kilogram}).
+    \item Se aplicó una fuerza constante de \SI{100}{\newton} con el cursor.
+    \item Se midieron el tiempo y la velocidad final para cada caso.
+    \item Se calculó la aceleración mediante $a = \frac{F}{m}$.
+    \item Se comprobó que, al aumentar la masa, la aceleración disminuye, verificando que $a \propto \frac{1}{m}$.
+\end{enumerate}
+
+\subsubsection{Registro de Datos}
+\begin{table}[H]
+\centering
+\caption{Datos de aceleración y tiempos del simulador.}
+\begin{tabularx}{\textwidth}{@{} C C C C C @{}}
+\toprule
+\textbf{Masa [$kg$]} & \textbf{$t_{f}$ [$s$]} & \textbf{$v_{f}$ [$m/s$]} & \textbf{$F_{\text{apl}}$ [$N$]} & \textbf{$a$ [$\frac{m}{s^2}$]} \\ \midrule
+50,00  & 5,99 & 12,00 & 100 & 2,00 \\
+100,00 & 6,05 & 6,10  & 100 & 1,00 \\
+130,00 & 6,05 & 4,47  & 100 & 0,77 \\
+200,00 & 6,05 & 3,00  & 100 & 0,50 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection{Análisis de Resultados}
+Los resultados obtenidos muestran que, manteniendo constante la fuerza, la aceleración disminuye al aumentar la masa del bloque. Por ejemplo, el bloque de \SI{50}{\kilogram} alcanzó una aceleración de \SI{2}{\meter\per\second\squared}, mientras que el de \SI{200}{\kilogram} solo alcanzó \SI{0.5}{\meter\per\second\squared}. Esta relación inversa confirma cuantitativamente la Segunda Ley de Newton ($a = \frac{F}{m}$). De este modo, la masa actúa como una medida de la inercia de un cuerpo, es decir, su resistencia al cambio de movimiento.
+
+% -------------------------------------------------------------------------
+\subsection{Actividad 4: Cálculo de masa desconocida}
+\subsubsection{Procedimiento}
+\begin{enumerate}
+    \item En la misma pestaña, se aplicó una fuerza de \SI{150}{\newton} durante \SI{2.5}{\second} a un bloque de masa desconocida.
+    \item Se midió una velocidad final de \SI{7.5}{\meter\per\second}.
+    \item Se calculó la aceleración: $a = \frac{v}{t}$.
+    \item La masa se determinó usando $m = \frac{F}{a}$.
+\end{enumerate}
+
+\subsubsection{Registro de Datos}
+\begin{table}[H]
+\centering
+\caption{Datos del cálculo de la masa desconocida.}
+\begin{tabularx}{\textwidth}{@{} C C C C C @{}}
+\toprule
+\textbf{Fuerza [$N$]} & \textbf{Tiempo [$s$]} & \textbf{$v_{f}$ [$m/s$]} & \textbf{$a$ [$\frac{m}{s^2}$]} & \textbf{Masa Calculada [$kg$]} \\ \midrule
+150 & 2.5 & 7.5 & 3 & 50 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection{Análisis de Resultados}
+En esta actividad se aplicó una fuerza constante de \SI{150}{\newton} durante \SI{2.5}{\second} sobre un bloque de masa desconocida, obteniéndose una velocidad final de \SI{7.5}{\meter\per\second}. Al calcular la aceleración mediante la relación $a = \frac{v}{t}$ se obtuvo un valor de \SI{3}{\meter\per\second\squared}, y aplicando la Segunda Ley de Newton ($F = m \cdot a$) se determinó que la masa del bloque es de \SI{50}{\kilogram}.
+
+Los resultados confirman que la aceleración es directamente proporcional a la fuerza aplicada e inversamente proporcional a la masa del cuerpo. El experimento demuestra que es posible determinar experimentalmente la masa a partir de cinemática y dinámica elementales en un entorno sin fricción.
+
+% -------------------------------------------------------------------------
+\subsection{Actividad 5: Cálculo de coeficientes de fricción}
+\subsubsection{Procedimiento}
+\begin{enumerate}
+    \item Se cambió a la pestaña ``Fricción'' del simulador.
+    \item Se aumentó gradualmente la fuerza aplicada hasta que el bloque comenzó a moverse, registrando la fuerza de fricción estática máxima ($f_s$).
+    \item Luego se midió la fuerza de fricción cinética ($f_k$) durante el movimiento.
+    \item Se repitió el proceso para tres posiciones del cursor de rugosidad (baja, media, alta).
+    \item Se calcularon los coeficientes mediante: $\mu_s = \frac{f_s}{N}$ y $\mu_k = \frac{f_k}{N}$.
+\end{enumerate}
+
+\subsubsection{Registro de Datos}
+\begin{table}[H]
+\centering
+\caption{Datos de los coeficientes de rozamiento obtenidos del simulador.}
+\begin{tabularx}{\textwidth}{@{} C C C C C @{}}
+\toprule
+\textbf{Posición del Cursor} & \textbf{$f_{s}$ [$N$]} & \textbf{$f_{k}$ [$N$]} & \textbf{$\mu_{s}$} & \textbf{$\mu_{k}$} \\ \midrule
+1 (baja)        & 63  & 44  & 0.129 & 0.090 \\
+2 (intermedio)  & 123 & 92  & 0.25  & 0.19  \\
+3 (alta)        & 185 & 139 & 0.38  & 0.28  \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection{Análisis de Resultados}
+Se determinaron los coeficientes estático y cinético en tres condiciones diferentes de superficie. En todos los casos el coeficiente de fricción estática fue mayor que el cinético, cumpliendo con la relación teórica de umbral mecánico. A medida que aumenta la rugosidad de la superficie, crecen los valores de las fuerzas de fricción y por tanto también los coeficientes $\mu_s$ y $\mu_k$, validando que $f_{s,\text{max}} = \mu_s N$ y $f_k = \mu_k N$. Una vez vencida la fricción estática máxima, el cuerpo se acelera inicialmente de forma brusca debido al descenso del rozamiento al valor cinético.
+
+% -------------------------------------------------------------------------
+\subsection{Actividad 6: Movimiento con fricción y masa desconocida}
+\subsubsection{Procedimiento}
+\begin{enumerate}
+    \item Se aplicó una fuerza de \SI{250}{\newton} a un bloque sobre una superficie con fricción.
+    \item El indicador del simulador mostró una fuerza de fricción de \SI{184}{\newton}.
+    \item Se calculó la fuerza neta restando ambas magnitudes horizontales.
+    \item Con la aceleración medida por el software, se halló la masa del bloque empleando la Segunda Ley de Newton.
+\end{enumerate}
+
+\subsubsection{Registro de Datos}
+\begin{table}[H]
+\centering
+\caption{Datos para el cálculo de la masa desconocida con rozamiento.}
+\begin{tabularx}{\textwidth}{@{} C C C C C @{}}
+\toprule
+\textbf{Fuerza [$N$]} & \textbf{Fricción [$N$]} & \textbf{Fuerza Neta [$N$]} & \textbf{$a$ [$\frac{m}{s^2}$]} & \textbf{Masa Calculada [$kg$]} \\ \midrule
+250 & 184 & 66 & 0.66 & 100 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection{Análisis de Resultados}
+Al aplicar una fuerza de \SI{250}{\newton}, la fricción opuso una resistencia de \SI{184}{\newton}, generando una fuerza neta de \SI{66}{\newton} que permitió el movimiento del bloque con una aceleración de \SI{0.66}{\meter\per\second\squared}. El cálculo de la masa del cuerpo mediante la relación:
+\begin{equation}
+    m = \frac{F_{\text{neta}}}{a}
+\end{equation}
+dio como resultado aproximadamente \SI{100}{\kilogram}. La fricción reduce directamente la aceleración neta efectiva en comparación con el escenario ideal sin rozamiento.
+
+% -------------------------------------------------------------------------
+\subsection{Actividad 7: Identificación de errores físicos}
+\subsubsection{Procedimiento}
+\begin{enumerate}
+    \item Se visualizó con detalle la interfaz del simulador PhET expuesta en la Figura 1.
+    \item Se identificaron los errores lógicos, dinámicos o hidrostáticos presentes en la imagen.
+    \item Se redactó la explicación física de dichas contradicciones.
+\end{enumerate}
+
+\subsubsection{Registro de Datos}
+\begin{figure}[H]
+    \centering
+    % Reemplaza 'figura1.png' con el nombre de tu archivo de imagen real
+    %\includegraphics[width=0.6\textwidth]{figura1.png}
+    \framebox[0.6\textwidth]{\vbox to 3cm{\vfill\centering [Insertar aquí la Figura 1 del Simulador]\vfill}}
+    \caption{Interfaz del simulador PhET para análisis de inconsistencias.}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Datos de observaciones y análisis de errores de la Figura 1.}
+\begin{tabularx}{\textwidth}{@{} c c c c c c c c @{}}
+\toprule
+\textbf{$m$ [$kg$]} & \textbf{$F_{\text{apl}}$ [$N$]} & \textbf{$F_{\text{fric}}$ [$N$]} & \textbf{$\Sigma F$ [$N$]} & \textbf{$a_{\text{mostrada}}$ [$\frac{m}{s^2}$]} & \textbf{$a_{\text{esperada}}$ [$\frac{m}{s^2}$]} & \textbf{Agua} & \textbf{Obs.} \\ \midrule
+100 & 330 & -330 & 0 & -3.30 & 0 & Derecha & Inconsistente \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection{Análisis de Resultados}
+En la imagen del simulador, el vaso de agua de \SI{100}{\kilogram} está sometido a dos fuerzas horizontales de igual magnitud: una fuerza aplicada de \SI{330}{\newton} hacia la derecha y una fricción de \SI{330}{\newton} hacia la izquierda. De acuerdo con la Segunda Ley de Newton, cuando las fuerzas son iguales y opuestas, la fuerza neta total es nula ($\Sigma F = 0$), implicando que el cuerpo no debería experimentar aceleración alguna.
+
+Sin embargo, en la figura se observa una aceleración negativa de $\SI{-3.3}{\meter\per\second\squared}$ y una inclinación de la superficie libre del agua hacia adelante (derecha), lo cual representa una fuerte inconsistencia física. Si realmente la fuerza neta fuese cero, el agua debería permanecer completamente nivelada e hidrostática. La inclinación hacia adelante solo sería correcta si el recipiente estuviera experimentando un frenado o aceleración neta hacia la izquierda, lo cual contradice el diagrama de cuerpo libre expuesto.
+
+% -------------------------------------------------------------------------
+\subsection{Actividad 8: Plano inclinado}
+\subsubsection{Procedimiento}
+\begin{enumerate}
+    \item Se colocó un bloque sobre un plano inclinado y se ajustó el ángulo entre $\SI{20}{\degree}$ y $\SI{45}{\degree}$.
+    \item Se variaron los valores del coeficiente de fricción ($\mu$) entre 0.00 y 0.30.
+    \item Se midieron las aceleraciones simuladas y teóricas para cada ángulo.
+    \item Se calcularon los tiempos simulados y teóricos de recorrido a lo largo de una distancia fija de \SI{1.00}{\meter}.
+    \item Se determinó el ángulo mínimo de deslizamiento (ángulo crítico).
+\end{enumerate}
+
+\subsubsection{Registro de Datos}
+\begin{table}[H]
+\centering
+\caption{Datos obtenidos en el Experimento 1 (Plano inclinado).}
+\begin{tabularx}{\textwidth}{@{} C C C C C C C C C @{}}
+\toprule
+\textbf{No.} & $\boldsymbol{\mu}$ & \textbf{$m$ [$kg$]} & \textbf{$\theta$ [\si{\degree}]} & \textbf{$d$ [$m$]} & \textbf{$a_{\text{sim}}$ [$\frac{m}{s^2}$]} & \textbf{$a_{\text{teor}}$ [$\frac{m}{s^2}$]} & \textbf{$t_{\text{sim}}$ [$s$]} & \textbf{$t_{\text{calc}}$ [$s$]} \\ \midrule
+1 & 0.00 & 5.00 & 25.00 & 1.00 & 4.14 & 4.14 & 0.69 & 0.70 \\
+2 & 0.30 & 5.00 & 30.00 & 1.00 & 2.35 & 2.49 & 0.92 & 0.90 \\
+3 & 0.30 & 5.00 & 20.00 & 1.00 & 0.59 & 0.61 & 1.84 & 1.81 \\
+4 & 0.30 & 5.00 & 45.00 & 1.00 & 4.85 & 4.83 & 0.64 & 0.61 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection{Análisis de Resultados}
+Los valores simulados y teóricos coincidieron con gran precisión, validando el modelo cinemático-dinámico de la ecuación $a = g(\sin\theta - \mu \cos\theta)$. Se observó que, ante la ausencia de fricción, la aceleración depende exclusivamente del ángulo de inclinación y de la gravedad, independientemente de la masa del bloque. El bloque comenzó a deslizarse de forma sostenida entre los $\SI{20}{\degree}$ y $\SI{25}{\degree}$, identificándose ese rango como el umbral crítico asociado al coeficiente estático.
+
+\begin{figure}[H]
+    \centering
+    % Reemplaza 'figura2.png' con el nombre de tu archivo de imagen real
+    %\includegraphics[width=0.55\textwidth]{figura2.png}
+    \framebox[0.6\textwidth]{\vbox to 3cm{\vfill\centering [Insertar Gráfico de Aceleración vs 1/m]\vfill}}
+    \caption{Gráfico de aceleración vs inverso de la masa (Experimento 1).}
+\end{figure}
+
+% -------------------------------------------------------------------------
+\subsection{Actividad 9: Sistema de masas acopladas}
+\subsubsection{Procedimiento}
+\begin{enumerate}
+    \item Se configuró un sistema con dos masas ($m_1$ sobre riel horizontal y $m_2$ colgante) unidas por una cuerda sobre una polea ideal.
+    \item Se variaron las magnitudes de las masas y los coeficientes de fricción cinéticos.
+    \item Se calculó de manera analítica la aceleración teórica del sistema acoplado.
+    \item Se registraron los tiempos cinemáticos para una distancia de traslación de \SI{1.00}{\meter}.
+\end{enumerate}
+
+\subsubsection{Registro de Datos}
+\begin{table}[H]
+\centering
+\caption{Datos obtenidos en el Experimento 2 (Masas acopladas).}
+\begin{tabularx}{\textwidth}{@{} c C C C C C C C C @{}}
+\toprule
+\textbf{No.} & $\boldsymbol{\mu}$ & \textbf{$m_1$ [$kg$]} & \textbf{$m_2$ [$kg$]} & \textbf{$d$ [$m$]} & \textbf{$a_{\text{sim}}$ [$\frac{m}{s^2}$]} & \textbf{$a_{\text{teor}}$ [$\frac{m}{s^2}$]} & \textbf{$t_{\text{sim}}$ [$s$]} & \textbf{$t_{\text{calc}}$ [$s$]} \\ \midrule
+1 & 0.00 & 5.00 & 5.50 & 1.00 & 5.13 & 5.17 & 0.62 & 0.62 \\
+2 & 0.00 & 5.00 & 4.50 & 1.00 & 4.64 & 4.64 & 0.66 & 0.66 \\
+3 & 0.20 & 5.00 & 5.50 & 1.00 & 4.20 & 4.16 & 0.69 & 0.69 \\
+4 & 0.50 & 7.50 & 3.00 & 1.00 & 0.00 & -0.49 & No se mueve & No se mueve \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection{Análisis de Resultados}
+Los datos registrados muestran una alta concordancia entre los valores simulados y teóricos. Cuando el coeficiente de fricción fue nulo ($\mu = 0$), las masas se aceleraron notablemente. Al aumentar la masa colgante ($m_2$), la fuerza motriz del sistema ($P_2 = m_2 g$) crece, provocando un aumento en la aceleración neta.
+
+En cambio, al introducir fricción ($\mu = 0.2$), la aceleración disminuyó. En el caso extremo con $\mu = 0.5$, la fuerza de rozamiento estático máxima fue capaz de contrarrestar por completo el peso de la masa colgante, dando lugar a un estado de equilibrio estático ($a = 0$), lo que teóricamente arroja una aceleración negativa irreal si se calculara con ecuaciones cinéticas directas. La tendencia lineal del sistema se aprecia en la Figura 3.
+
+\begin{figure}[H]
+    \centering
+    % Reemplaza 'figura3.png' con el nombre de tu archivo de imagen real
+    %\includegraphics[width=0.55\textwidth]{figura3.png}
+    \framebox[0.6\textwidth]{\vbox to 3cm{\vfill\centering [Insertar Gráfico de Aceleración vs Fuerza Aplicada]\vfill}}
+    \caption{Gráfico de aceleración vs fuerza aplicada (Experimento 2).}
+\end{figure}
+
+% -------------------------------------------------------------------------
+\subsection{Actividad 10: Bloque con masa colgante en plano inclinado}
+\subsubsection{Procedimiento}
+\begin{enumerate}
+    \item Se analizó un sistema compuesto por un bloque $m_1$ sobre un plano inclinado a un ángulo $\theta$, conectado mediante una cuerda y una polea a una masa colgante vertical $m_2$.
+    \item Se modificaron de forma controlada los valores de $m_1$, $m_2$, el ángulo $\theta$ y el coeficiente de fricción $\mu$.
+    \item Se registraron las aceleraciones simuladas y teóricas correspondientes para clasificar el tipo de movimiento.
+\end{enumerate}
+
+\subsubsection{Registro de Datos}
+\begin{table}[H]
+\centering
+\caption{Datos obtenidos en el Experimento 3 (Masa en plano inclinado acoplada a masa colgante).}
+\begin{tabularx}{\textwidth}{@{} c C C C C C C C C C @{}}
+\toprule
+\textbf{No.} & $\boldsymbol{\mu}$ & \textbf{$m_1$ [$kg$]} & \textbf{$m_2$ [$kg$]} & \textbf{$\theta$ [\si{\degree}]} & \textbf{$d$ [$m$]} & \textbf{$a_{\text{sim}}$ [$\frac{m}{s^2}$]} & \textbf{$a_{\text{teor}}$ [$\frac{m}{s^2}$]} & \textbf{$t_{\text{sim}}$ [$s$]} & \textbf{$t_{\text{calc}}$ [$s$]} \\ \midrule
+1 & 0.00 & 10.00 & 4.23 & 25.00 & 1.00 & 0.00 & -1.63 & No se mueve & No se mueve \\
+2 & 0.40 & 10.00 & 4.23 & 25.00 & 1.00 & 0.00 & -3.68 & No se mueve & No se mueve \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% =========================================================================
+% 5. CONCLUSIONES
+% =========================================================================
+\section{Conclusiones}
+Tras la ejecución de las diversas actividades en los entornos virtuales de simulación, se concluye lo siguiente:
+\begin{itemize}
+    \item Se comprobó de manera satisfactoria la Segunda Ley de Newton, validando que la aceleración de un sistema es directamente proporcional a la fuerza neta e inversamente proporcional a la masa total involucrada.
+    \item Las fuerzas de fricción actúan en todo momento como agentes disipativos y opuestos al vector de velocidad relativa de las superficies. En el Experimento 2 y 3 se evidenció que coeficientes elevados ($\mu = 0.4, 0.5$) son capaces de restringir por completo el movimiento, induciendo un estado de reposo permanente.
+    \item Las discrepancias detectadas en la Actividad 7 permitieron afianzar el análisis crítico experimental, demostrando que la presencia de aceleraciones en fluidos ideales genera gradientes en la superficie libre debido a efectos de inercia, lo que evidenció un error de correspondencia gráfica en el software analizado.
+    \item El uso de herramientas de simulación interactiva (PhET y UNED) provee una plataforma controlada idónea para la visualización y modelado de sistemas mecánicos complejos, arrojando una correlación numérica casi perfecta con las ecuaciones del formalismo newtoniano clásico.
+\end{itemize}
+
+% =========================================================================
+% 6. BIBLIOGRAFÍA
+% =========================================================================
+\clearpage
+\begin{thebibliography}{9}
+\bibitem{phet} 
+PhET Interactive Simulations, 
+\textit{``Fuerzas y Movimiento: Fundamentos''}, 
+Universidad de Colorado Boulder, 2023. [En línea]. Disponible en: \texttt{https://phet.colorado.edu/}
+
+\bibitem{uned} 
+Universidad Nacional de Educación a Distancia (UNED), 
+\textit{``Simulador Interactivo: Segunda Ley de Newton''}, 
+Proyecto de Enseñanza Multimedia, 2023. [En línea]. Disponible en: \texttt{https://multimedia.uned.ac.cr/}
+\end{thebibliography}
+
+\end{document}
